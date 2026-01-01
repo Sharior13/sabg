@@ -1,0 +1,27 @@
+{
+  "name": "sabg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./server/server.js",
+  "scripts": {
+    "start": "node ./server/server.js",
+    "start-nodemon": "nodemon ./server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sharior13/sabg.git"
+  },
+  "keywords": [],
+  "author": "Sharior13",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Sharior13/sabg/issues"
+  },
+  "homepage": "https://github.com/Sharior13/sabg#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "nodemon": "^3.1.11",
+    "socket.io": "^4.8.3"
+  }
+}
