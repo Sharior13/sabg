@@ -1,6 +1,6 @@
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
-const socket = io();
+import { initiateSocket } from "./socket.js";
+import { initiateRender } from "./renderer.js";
+import { initiateInput } from "./input.js";
 
-canvas.width = window.innerWidth-100;
-canvas.height = window.innerHeight-100;
+initiateSocket(initiateInput());
+initiateRender();
