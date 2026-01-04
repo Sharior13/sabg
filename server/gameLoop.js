@@ -1,6 +1,5 @@
 const { Socket } = require('socket.io');
 const state = require('./game/state.js');
-const socketHandler = require('./socket/socketHandler.js');
 
 module.exports = (io)=>{
     setInterval(()=>{
@@ -17,12 +16,12 @@ module.exports = (io)=>{
             if(p.input['s']||p.input['ArrowDown']){
                 p.position.y+=p.speed;
             }
-            if(p.input['a']||p.input['ArrowRight']){
+            if(p.input['a']||p.input['ArrowLeft']){
                 p.position.x-=p.speed;
             }
-            if(p.input['d']||p.input['ArrowLeft']){
+            if(p.input['d']||p.input['ArrowRight']){
                 p.position.x+=p.speed;
             }
         }
-    },1000/30);
+    },1000/60);
 }
