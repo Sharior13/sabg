@@ -1,4 +1,5 @@
-const initiateSocket = (setMap, input)=>{
+import { setMap } from "./renderer.js";
+const initiateSocket = (input)=>{
     const socket = io();
 
     socket.on('id', (id)=>{
@@ -8,7 +9,6 @@ const initiateSocket = (setMap, input)=>{
         console.log("maybe working fine");
         //interpolation in fuuture??
         window.gameState = backEndState;
-        // console.log(window.gameState);
     });
     socket.on("map", (map) => {
         setMap(map);

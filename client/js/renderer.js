@@ -5,7 +5,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let currentMap = null;
-//add mapimage logic later
+//add map image logic later
 let mapImage = new Image();
 mapImage.src = "../assets/map1.png";
 const camera = { x: 0, y: 0 };
@@ -25,6 +25,7 @@ const initiateRender = ()=>{
             ctx.arc(p.position.x, p.position.y, p.radius, 0, Math.PI*2);
             ctx.fill();
             ctx.closePath();
+            drawWeapon(p);
         }
     }
 
@@ -34,6 +35,15 @@ const initiateRender = ()=>{
         ctx.restore();
     }
 
+    const drawWeapon = (p)=>{
+        const angle = p.input.angle;
+        ctx.save();
+        ctx.translate(p.position.x, p.position.y);
+        ctx.rotate(angle);
+        ctx.fillStyle = "black";
+        ctx.fillRect(0, -12/2, 100, 12);
+        ctx.restore();
+    }
     const updateCamera = ()=>{
         camera.x = window.gameState.player[window.myId].position.x - canvas.width / 2;
         camera.y = window.gameState.player[window.myId].position.y - canvas.height / 2;
@@ -59,4 +69,4 @@ const initiateRender = ()=>{
     animate();
 }
 
-export { initiateRender, setMap };
+export { initiateRender, setMap, canvas, camera };

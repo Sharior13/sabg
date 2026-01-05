@@ -1,6 +1,6 @@
 import { initiateSocket } from "./socket.js";
-import { initiateRender, setMap } from "./renderer.js";
+import { initiateRender } from "./renderer.js";
 import { initiateInput } from "./input.js";
 
-initiateSocket(setMap, initiateInput());
+initiateSocket(initiateInput());
 initiateRender();

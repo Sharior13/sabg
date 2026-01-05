@@ -6,10 +6,11 @@ module.exports = (io)=>{
     io.on('connection', (socket)=>{
         console.log("user connected!");
         
-        state.player[socket.id] = new Player();
+        state.player[socket.id] = new Player(socket.id);
 
         socket.emit("id", socket.id);
         socket.emit('map',map);
+        
         socket.on('input',(input)=>{
             state.player[socket.id].input = input;
         })
