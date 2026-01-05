@@ -1,5 +1,6 @@
-const Player = require('../game/player.js');
+const { Player } = require('../game/entities.js');
 const state = require('../game/state.js');
+const map = require('../game/map/map1.js');
 
 module.exports = (io)=>{
     io.on('connection', (socket)=>{
@@ -7,6 +8,8 @@ module.exports = (io)=>{
         
         state.player[socket.id] = new Player();
 
+        socket.emit("id", socket.id);
+        socket.emit('map',map);
         socket.on('input',(input)=>{
             state.player[socket.id].input = input;
         })

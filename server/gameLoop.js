@@ -1,5 +1,6 @@
 const { Socket } = require('socket.io');
 const state = require('./game/state.js');
+const map = require('./game/map/map1.js')
 
 module.exports = (io)=>{
     setInterval(()=>{
@@ -22,6 +23,10 @@ module.exports = (io)=>{
             if(p.input['d']||p.input['ArrowRight']){
                 p.position.x+=p.speed;
             }
+
+            p.position.x = Math.max(p.radius, Math.min(p.position.x, map.width-p.radius));
+            p.position.y = Math.max(p.radius, Math.min(p.position.y, map.height-p.radius));
         }
     },1000/60);
+    
 }
