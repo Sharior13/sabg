@@ -10,12 +10,11 @@ const initiateInput = ()=>{
         ArrowDown: false,
         ArrowLeft: false,
         ArrowRight: false,
-        " ": false,
         mouse: {
             x: 0,
             y: 0,
-            clicked: false
         },
+        clicked: false,
         angle: null
     };
 
@@ -42,10 +41,10 @@ const initiateInput = ()=>{
     }
     });
     window.addEventListener('mousedown',()=>{
-        keys.mouse.clicked = true;
+        keys.clicked = true;
     });
     window.addEventListener('mouseup',()=>{
-        keys.mouse.clicked = false;
+        keys.clicked = false;
     });
 
     return keys;

@@ -15,13 +15,21 @@ class Player {
         this.color = `hsl(${360 * Math.random()}, 100%, 50%)`;
         this.speed = 5;
         this.input = {};
-        this.weapon = "assault";
+        this.weapon = "pistol";
+        this.ammo = 12;
         this.lastShot = 0
     }
 }
 
 class Bullet {
-    constructor(){}
+    constructor({position, angle, speed, damage, owner}){
+        this.radius = 9;
+        this.position = position;
+        this.angle = angle,
+        this.speed = speed;
+        this.damage = damage;
+        this.owner = owner;
+    }
 }
 
 module.exports = { Player, Bullet };

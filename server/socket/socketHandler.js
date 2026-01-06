@@ -2,7 +2,7 @@ const { Player } = require('../game/entities.js');
 const state = require('../game/state.js');
 const map = require('../game/map/map1.js');
 
-module.exports = (io)=>{
+const socketHandler = (io)=>{
     io.on('connection', (socket)=>{
         console.log("user connected!");
         
@@ -22,3 +22,5 @@ module.exports = (io)=>{
         });
     });
 }
+
+module.exports = socketHandler;
