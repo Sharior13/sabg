@@ -15,8 +15,8 @@ class Player {
         this.color = `hsl(${360 * Math.random()}, 100%, 50%)`;
         this.speed = 5;
         this.input = {};
-        this.weapon = "pistol";
-        this.ammo = 12;
+        this.weapon = "sniper";
+        this.ammo = 8;
         this.lastShot = 0
     }
 }

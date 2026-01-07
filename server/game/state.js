@@ -19,6 +19,15 @@ const state = {
             speed: 25,
             reloadTime: 2000,
             spread: 10
+        },
+        sniper: {
+            width: 85,
+            height: 9,
+            fireRate: 1,
+            ammo: 8,
+            speed: 40,
+            reloadTime: 5000,
+            spread: 0
         }
     }
 }
