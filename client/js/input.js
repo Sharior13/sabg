@@ -15,17 +15,20 @@ const initiateInput = ()=>{
             y: 0,
         },
         clicked: false,
-        angle: null
+        angle: null,
+        event: null
     };
 
     window.addEventListener('keydown',(event)=>{
         if(event.key in keys){
             keys[event.key] = true;
+            keys.event = event;
         }
     });
     window.addEventListener('keyup',(event)=>{
         if(event.key in keys){
             keys[event.key] = false;
+            keys.event = event;
         }
     });
     window.addEventListener('mousemove',(event)=>{
@@ -40,7 +43,11 @@ const initiateInput = ()=>{
         keys.angle = Math.atan2(keys.mouse.y + camera.y - window.gameState.player[window.myId].position.y, keys.mouse.x + camera.x - window.gameState.player[window.myId].position.x);
     }
     });
-    window.addEventListener('mousedown',()=>{
+    window.addEventListener('mousedown',(event)=>{
+        if(event.repeat){
+            keys.clicked = false;
+            return;
+        }
         keys.clicked = true;
     });
     window.addEventListener('mouseup',()=>{
