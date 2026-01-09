@@ -6,6 +6,8 @@ const initiateInput = ()=>{
         a: false,
         d: false,
         r: false,
+        "1": false,
+        "2": false,
         ArrowUp: false,
         ArrowDown: false,
         ArrowLeft: false,

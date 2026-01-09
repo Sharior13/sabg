@@ -25,8 +25,9 @@ const initiateRender = ()=>{
         for(const id in window.gameState.player){
             let p = window.gameState.player[id];
             
-
             drawBullets(p);
+
+            //skip rendering dead players and show death message for current player
             if(p.isDead){
                 if(p.id == window.myId){
                     displayDeath(p);
@@ -114,4 +115,4 @@ const initiateRender = ()=>{
     animate();
 };
 
-export { initiateRender, setMap, canvas, camera };
+export { initiateRender, setMap, canvas, ctx, camera };

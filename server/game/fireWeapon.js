@@ -12,13 +12,14 @@ const fireWeapon = (player, state, now)=>{
 
     //reloading logic
     if(player.reload){
-        setTimeout(()=>{
+        if(now - player.lastShot > weapon.reloadTime){
             player.ammo = weapon.ammo;
             player.reload = false;
-        }, weapon.reloadTime);
+        }
         return;
     }
 
+    //return if no ammo
     if(player.ammo<=0){
         return;
     }

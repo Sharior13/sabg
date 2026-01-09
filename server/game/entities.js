@@ -1,20 +1,22 @@
 const map = require('./map/map1.js');
 
 class Player {
-    constructor(id){
+    constructor(id, name){
         this.id = id;
+        this.name = name;
         this.radius = 48;
         this.health = 100;
         this.isDead = false;
         this.deathTime = 0;
         this.position = {
+            //change on map implementation
             x: Math.floor(Math.random() * (map.width-this.radius) + this.radius),
             y: Math.floor(Math.random() * (map.height-this.radius) + this.radius),
         };
         this.color = `hsl(${360 * Math.random()}, 100%, 50%)`;
         this.speed = 5;
         this.input = {};
-        this.weapon = "pistol";
+        this.weapon = "assault";
         this.ammo = 30;
         this.lastShot = 0;
         this.reload = false;

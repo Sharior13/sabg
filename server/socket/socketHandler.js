@@ -16,7 +16,7 @@ const socketHandler = (io)=>{
         //handle user inputs
         socket.on('input',(input)=>{
             state.player[socket.id].input = input;
-        })
+        });
         
         //handle user disconnection
         socket.on('disconnect', ()=>{

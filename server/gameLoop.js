@@ -1,4 +1,3 @@
-const { Socket } = require('socket.io');
 const state = require('./game/state.js');
 const map = require('./game/map/map1.js');
 const fireWeapon = require('./game/fireWeapon.js');
@@ -10,8 +9,10 @@ const gameLoop = (io)=>{
 
         //loop through every connected player
         for(const id in state.player){
-            p = state.player[id];
+            let p = state.player[id];
+            let weapon = state.weapons[p.weapon];
             
+            //player respawn logic
             if(p.isDead && (now - p.deathTime) > 5000){
                 p.isDead = false;
                 p.health = 100;
@@ -22,6 +23,7 @@ const gameLoop = (io)=>{
                 continue;
             }
             
+            //player death logic
             if(p.health<=0){
                 p.isDead = true;
                 p.deathTime = now;
@@ -42,7 +44,7 @@ const gameLoop = (io)=>{
                 
                 //player to player collision
                 p2 = state.player[id2];
-                if(circleCollision(state.player[id], state.player[id2])){
+                if(circleCollision(p, p2) && (!p.isDead || !p2.isDead)){
                     if(p.position.x > p2.position.x){
                         p2.position.x-=p2.speed;
                     }
@@ -74,6 +76,14 @@ const gameLoop = (io)=>{
             if(p.input['r']){
                 p.reload = true;
                 fireWeapon(p, state, now);
+            }
+            if(p.input['1']){
+                p.weapon = "assault";
+                p.ammo = weapon.ammo;
+            }
+            if(p.input['2']){
+                p.weapon = "pistol";
+                p.ammo = weapon.ammo;
             }
             if(p.input.clicked){
                 fireWeapon(p, state, now);
