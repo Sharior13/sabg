@@ -5,6 +5,8 @@ class Player {
         this.id = id;
         this.radius = 48;
         this.health = 100;
+        this.isDead = false;
+        this.deathTime = 0;
         this.position = {
             x: Math.floor(Math.random() * (map.width-this.radius) + this.radius),
             y: Math.floor(Math.random() * (map.height-this.radius) + this.radius),

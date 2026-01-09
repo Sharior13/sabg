@@ -8,7 +8,11 @@ let currentMap = null;
 //add map image logic later
 let mapImage = new Image();
 mapImage.src = "../assets/map1.png";
-const camera = { x: 0, y: 0 };
+
+const camera = { 
+    x: 0, 
+    y: 0 
+};
 
 const setMap = (map)=>{
     currentMap = map;
@@ -20,8 +24,17 @@ const initiateRender = ()=>{
     const drawPlayer = ()=>{
         for(const id in window.gameState.player){
             let p = window.gameState.player[id];
-            drawWeapon(p);
+            
+
             drawBullets(p);
+            if(p.isDead){
+                if(p.id == window.myId){
+                    displayDeath(p);
+                }
+                continue;
+            }
+            drawWeapon(p);
+
             ctx.beginPath();
             ctx.fillStyle = p.color;
             ctx.arc(p.position.x, p.position.y, p.radius, 0, Math.PI*2);
@@ -60,6 +73,18 @@ const initiateRender = ()=>{
                 ctx.closePath();
             }
         }
+    };
+
+    const displayDeath = (p)=>{
+        ctx.save();
+        ctx.resetTransform();
+        ctx.beginPath();
+        ctx.font = "50px Arial";
+        ctx.fillStyle = "red";
+        ctx.fillText("You died LMAOOOO", canvas.width/2-250, canvas.height/2, 500);
+        ctx.fillText(`Respawning in ${(5 - (Date.now() - p.deathTime)/1000).toFixed(2)}...`, canvas.width/2-250, canvas.height/2 + 100, 500);
+        ctx.closePath();
+        ctx.restore();
     };
 
     //update current player's viewport

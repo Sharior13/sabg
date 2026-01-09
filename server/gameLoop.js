@@ -12,8 +12,27 @@ const gameLoop = (io)=>{
         for(const id in state.player){
             p = state.player[id];
             
-            if(!p.input){
+            if(p.isDead && (now - p.deathTime) > 5000){
+                p.isDead = false;
+                p.health = 100;
+                p.deathTime = 0;
+            }
+            
+            if(p.isDead){
                 continue;
+            }
+            
+            if(p.health<=0){
+                p.isDead = true;
+                p.deathTime = now;
+
+                //change position on respawn (complete after completing map implementation)
+                // let x = mapSpawn[Math.floor(Math.random() * 2)];
+                // let y = mapSpawn[Math.floor(Math.random() * 2)];
+                // p.position = {
+                //     x: x,
+                //     y: y
+                // };
             }
 
             for(const id2 in state.player){
