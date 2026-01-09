@@ -4,6 +4,7 @@ class Player {
     constructor(id){
         this.id = id;
         this.radius = 48;
+        this.health = 100;
         this.position = {
             x: Math.floor(Math.random() * (map.width-this.radius) + this.radius),
             y: Math.floor(Math.random() * (map.height-this.radius) + this.radius),
@@ -11,7 +12,7 @@ class Player {
         this.color = `hsl(${360 * Math.random()}, 100%, 50%)`;
         this.speed = 5;
         this.input = {};
-        this.weapon = "sniper";
+        this.weapon = "pistol";
         this.ammo = 30;
         this.lastShot = 0;
         this.reload = false;

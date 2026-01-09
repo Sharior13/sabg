@@ -16,8 +16,8 @@ const setMap = (map)=>{
 
 const initiateRender = ()=>{
 
+    //draw all connected players
     const drawPlayer = ()=>{
-        // console.log(window.gameState);
         for(const id in window.gameState.player){
             let p = window.gameState.player[id];
             drawWeapon(p);
@@ -62,6 +62,7 @@ const initiateRender = ()=>{
         }
     };
 
+    //update current player's viewport
     const updateCamera = ()=>{
         camera.x = window.gameState.player[window.myId].position.x - canvas.width / 2;
         camera.y = window.gameState.player[window.myId].position.y - canvas.height / 2;
@@ -71,6 +72,7 @@ const initiateRender = ()=>{
     };
 
 
+    //frontend game loop
     const animate = ()=>{
         requestAnimationFrame(animate);
         if(!window.gameState || !window.myId){

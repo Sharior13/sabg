@@ -7,15 +7,21 @@ const { circleCollision, borderCollision}  = require('./game/collision.js');
 const gameLoop = (io)=>{
     setInterval(()=>{
         const now = Date.now();
+
+        //loop through every connected player
         for(const id in state.player){
             p = state.player[id];
+            
             if(!p.input){
                 continue;
             }
+
             for(const id2 in state.player){
                 if(id == id2){
                     continue;
                 }
+                
+                //player to player collision
                 p2 = state.player[id2];
                 if(circleCollision(state.player[id], state.player[id2])){
                     if(p.position.x > p2.position.x){
@@ -33,6 +39,7 @@ const gameLoop = (io)=>{
                 }
             }
             
+            //update players based on input
             if(p.input['w']||p.input['ArrowUp']){
                 p.position.y-=p.speed;
             }
@@ -53,26 +60,30 @@ const gameLoop = (io)=>{
                 fireWeapon(p, state, now);
             }
             
+            //ensure player is within the map
             p.position.x = Math.max(p.radius, Math.min(p.position.x, map.width-p.radius));
             p.position.y = Math.max(p.radius, Math.min(p.position.y, map.height-p.radius));
 
 
+            //bullet to players collision
             for(let i=0; i<state.bullets.length; i++){
                 if(circleCollision(p, state.bullets[i]) && p.id != state.bullets[i].owner){
-                    console.log("DHAPPAAAAA");
-
+                    p.health -= state.bullets[i].damage;
+                    state.bullets.splice(i,1);
+                    i--;
                 }
             }
         }
 
-
         for(let i=0; i<state.bullets.length; i++){
+            //bullet to map collision
             if(borderCollision(state.bullets[i])){
                 state.bullets.splice(i,1);
                 i--;
-                console.log("gayoooo");
                 continue;
             }
+
+            //update bullets
             state.bullets[i].position.x += Math.cos(state.bullets[i].angle) * state.bullets[i].speed;
             state.bullets[i].position.y += Math.sin(state.bullets[i].angle) * state.bullets[i].speed;
 

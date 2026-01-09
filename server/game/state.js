@@ -9,7 +9,7 @@ const state = {
             ammo: 30,
             speed: 30,
             reloadTime: 3000,
-            spread: 15
+            spread: 18
         },
         pistol: {
             width: 75,
@@ -27,7 +27,7 @@ const state = {
             ammo: 8,
             speed: 40,
             reloadTime: 5000,
-            spread: 0
+            spread: 5
         }
     }
 }

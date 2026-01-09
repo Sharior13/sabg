@@ -25,6 +25,7 @@ app.use((req, res)=>{
 //handle socket events
 const socketHandler = require('./socket/socketHandler.js');
 socketHandler(io);
+
 //handle server side gameloop(players, movements, bullets)
 const serverGameLoop = require('./gameLoop.js');
 serverGameLoop(io);

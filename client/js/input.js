@@ -15,23 +15,22 @@ const initiateInput = ()=>{
             y: 0,
         },
         clicked: false,
-        angle: null,
-        event: null
+        angle: null
     };
 
+    //handle player inputs
     window.addEventListener('keydown',(event)=>{
         if(event.key in keys){
             keys[event.key] = true;
-            keys.event = event;
         }
     });
     window.addEventListener('keyup',(event)=>{
         if(event.key in keys){
             keys[event.key] = false;
-            keys.event = event;
         }
     });
     window.addEventListener('mousemove',(event)=>{
+        //get bounding client rect to adjust mouse according to player viewport
         const rect = canvas.getBoundingClientRect();
         const scaleX = canvas.width / rect.width;
         const scaleY = canvas.height / rect.height;
@@ -40,14 +39,11 @@ const initiateInput = ()=>{
             y: (event.clientY - rect.top) * scaleY
         };
         if(window.gameState){
-        keys.angle = Math.atan2(keys.mouse.y + camera.y - window.gameState.player[window.myId].position.y, keys.mouse.x + camera.x - window.gameState.player[window.myId].position.x);
+            //get angle of mouse from player centre
+            keys.angle = Math.atan2(keys.mouse.y + camera.y - window.gameState.player[window.myId].position.y, keys.mouse.x + camera.x - window.gameState.player[window.myId].position.x);
     }
     });
-    window.addEventListener('mousedown',(event)=>{
-        if(event.repeat){
-            keys.clicked = false;
-            return;
-        }
+    window.addEventListener('mousedown',()=>{
         keys.clicked = true;
     });
     window.addEventListener('mouseup',()=>{

@@ -4,9 +4,13 @@ const { Bullet } = require('./entities.js');
 const fireWeapon = (player, state, now)=>{
 
     let weapon = state.weapons[player.weapon];
+
+    //return if firing too fast
     if(now - player.lastShot < 1000 / weapon.fireRate){
         return;
     }
+
+    //reloading logic
     if(player.reload){
         setTimeout(()=>{
             player.ammo = weapon.ammo;
@@ -14,6 +18,7 @@ const fireWeapon = (player, state, now)=>{
         }, weapon.reloadTime);
         return;
     }
+
     if(player.ammo<=0){
         return;
     }
@@ -24,6 +29,7 @@ const fireWeapon = (player, state, now)=>{
 
     let spread = (Math.random() - 0.5) * ((weapon.spread * Math.PI)/180);
 
+    //push a new bullet into an array everytimes a player fires
     state.bullets.push(new Bullet({
         position: {
             x: player.position.x + Math.cos(player.input.angle) * weapon.width/2,
