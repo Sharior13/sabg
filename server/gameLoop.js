@@ -17,6 +17,14 @@ const gameLoop = (io)=>{
                 p.isDead = false;
                 p.health = 100;
                 p.deathTime = 0;
+
+                //change position on respawn (complete after completing map implementation)
+                // let x = mapSpawn[Math.floor(Math.random() * 2)];
+                // let y = mapSpawn[Math.floor(Math.random() * 2)];
+                p.position = {
+                    x: Math.floor(Math.random() * (map.width-p.radius) + p.radius),
+                    y: Math.floor(Math.random() * (map.height-p.radius) + p.radius),
+                };
             }
             
             if(p.isDead){
@@ -27,14 +35,6 @@ const gameLoop = (io)=>{
             if(p.health<=0){
                 p.isDead = true;
                 p.deathTime = now;
-
-                //change position on respawn (complete after completing map implementation)
-                // let x = mapSpawn[Math.floor(Math.random() * 2)];
-                // let y = mapSpawn[Math.floor(Math.random() * 2)];
-                // p.position = {
-                //     x: x,
-                //     y: y
-                // };
             }
 
             for(const id2 in state.player){
@@ -79,11 +79,11 @@ const gameLoop = (io)=>{
             }
             if(p.input['1']){
                 p.weapon = "assault";
-                p.ammo = weapon.ammo;
+                p.ammo = weapon.ammo - p.shotsFired1;
             }
             if(p.input['2']){
                 p.weapon = "pistol";
-                p.ammo = weapon.ammo;
+                p.ammo = weapon.ammo - p.shotsFired2;
             }
             if(p.input.clicked){
                 fireWeapon(p, state, now);

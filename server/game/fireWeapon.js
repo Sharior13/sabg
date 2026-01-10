@@ -26,6 +26,14 @@ const fireWeapon = (player, state, now)=>{
 
     player.ammo--;
 
+    //keep track of individual weapon ammo
+    if(player.weapon == "pistol"){
+        player.shotsFired2++;
+    }
+    else{
+        player.shotsFired1++;
+    }
+
     player.lastShot = now;
 
     let spread = (Math.random() - 0.5) * ((weapon.spread * Math.PI)/180);

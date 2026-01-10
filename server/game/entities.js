@@ -18,6 +18,8 @@ class Player {
         this.input = {};
         this.weapon = "assault";
         this.ammo = 30;
+        this.shotsFired1 = 0;
+        this.shotsFired2 = 0;
         this.lastShot = 0;
         this.reload = false;
     }
