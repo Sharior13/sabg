@@ -30,12 +30,6 @@ const gameLoop = (io)=>{
             if(p.isDead){
                 continue;
             }
-            
-            //player death logic
-            if(p.health<=0){
-                p.isDead = true;
-                p.deathTime = now;
-            }
 
             for(const id2 in state.player){
                 if(id == id2){
@@ -98,6 +92,15 @@ const gameLoop = (io)=>{
             for(let i=0; i<state.bullets.length; i++){
                 if(circleCollision(p, state.bullets[i]) && p.id != state.bullets[i].owner){
                     p.health -= state.bullets[i].damage;
+
+                    //player death logic
+                    if(p.health<=0){
+                        p.isDead = true;
+                        p.deathTime = now;
+                        p.deaths++;
+                        state.player[state.bullets[i].owner].kills++;
+                    }
+                    
                     state.bullets.splice(i,1);
                     i--;
                 }

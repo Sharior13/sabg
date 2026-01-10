@@ -6,6 +6,8 @@ class Player {
         this.name = name;
         this.radius = 48;
         this.health = 100;
+        this.kills = 0;
+        this.deaths = 0;
         this.isDead = false;
         this.deathTime = 0;
         this.position = {
