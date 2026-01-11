@@ -7,6 +7,12 @@
     border: 1px black solid;
     width: 90%;
     height: 90%;
+    z-index: -1;
+}
+#titleForm{
+    position: relative;
+    z-index: 1;
+
 }
 /* #canvas:hover{
     cursor: none;

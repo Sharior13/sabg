@@ -24,6 +24,11 @@ const initiateInput = ()=>{
     window.addEventListener('keydown',(event)=>{
         if(event.key in keys){
             keys[event.key] = true;
+            
+            //stop movement on window losing focus
+            window.addEventListener('blur',()=>{
+                keys[event.key] = false;
+            });
         }
     });
     window.addEventListener('keyup',(event)=>{

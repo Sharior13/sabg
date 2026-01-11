@@ -74,10 +74,12 @@ const gameLoop = (io)=>{
             if(p.input['1']){
                 p.weapon = "assault";
                 p.ammo = weapon.ammo - p.shotsFired1;
+                p.reload = false;
             }
             if(p.input['2']){
                 p.weapon = "pistol";
                 p.ammo = weapon.ammo - p.shotsFired2;
+                p.reload = false;
             }
             if(p.input.clicked){
                 fireWeapon(p, state, now);
