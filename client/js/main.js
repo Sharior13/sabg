@@ -11,18 +11,16 @@ const titleScreen = ()=>{
     ctx.fillText("Press ENTER to start", canvas.width/2 - 250, canvas.height/2, 500);
     ctx.closePath();
 
-    titleForm.style = `left:${canvas.width/2+100}px; top:${-canvas.height/2}px`;
-
-    const titleListener = window.addEventListener("keydown", (event)=>{
-        if(event.key == "Enter"){
-            window.removeEventListener("keydown", titleListener);
-            titleForm.style.display = "none";
-            
-            initiateSocket(initiateInput());
-            initiateRender();
-        }
-    });
+    titleForm.style = `left:${canvas.width/2 - 250}px; top:${-canvas.height/2 + 100}px`;
 };
+
+const startGame = ()=>{
+    titleForm.style.display = "none";
+    let username = titleForm.input.value;
+    
+    initiateSocket(initiateInput());
+    initiateRender();
+}
 
 titleScreen();
 // initiateSocket(initiateInput());
