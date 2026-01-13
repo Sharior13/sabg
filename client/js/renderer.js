@@ -18,6 +18,17 @@ const setMap = (map)=>{
     currentMap = map;
 };
 
+const playerBoard = document.getElementById('playerBoard');
+
+const displayLeaderboard = (player)=>{
+    playerBoard.innerHTML = "";
+        for(let i=0; i<player.length; i++){
+            let p = player[i];
+            playerBoard.innerHTML += `<div>${p.name}: ${p.score}</div>`;
+        }
+    };
+
+
 const initiateRender = ()=>{
 
     //draw all connected players
@@ -115,4 +126,4 @@ const initiateRender = ()=>{
     animate();
 };
 
-export { initiateRender, setMap, canvas, ctx, camera };
+export { initiateRender, setMap, displayLeaderboard, canvas, ctx, camera };

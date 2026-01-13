@@ -1,6 +1,7 @@
 const state = {
     player: {},
     bullets: [],
+    scores: [],
     weapons: {
         assault: {
             width: 100,

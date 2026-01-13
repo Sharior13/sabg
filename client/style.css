@@ -12,7 +12,16 @@
 #titleForm{
     position: relative;
     z-index: 1;
-
+    
+}
+#playerBoard{
+    position: relative;
+    left: 20px;
+    z-index: 1;
+    display: none;
+    width: 10%;
+    padding: 5px;
+    background-color: #0000005d;
 }
 /* #canvas:hover{
     cursor: none;

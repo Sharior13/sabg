@@ -10,7 +10,7 @@ class Player {
         this.deaths = 0;
         this.isDead = false;
         this.deathTime = 0;
-        this.score = this.kills - this.deaths;
+        this.score = 0
         this.position = {
             //change on map implementation
             x: Math.floor(Math.random() * (map.width-this.radius) + this.radius),

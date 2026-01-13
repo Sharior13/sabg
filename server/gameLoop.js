@@ -107,7 +107,19 @@ const gameLoop = (io)=>{
                     i--;
                 }
             }
+
+            //scoring logic
+            p.score = p.kills;
+            if(p.score < 0){
+                p.score = 0;
+            }
+
         }
+        state.scores = Object.values(state.player);
+        state.scores.sort((a,b)=>{
+            a.score - b.score;
+        });
+        console.log(state.scores);
 
         for(let i=0; i<state.bullets.length; i++){
             //bullet to map collision

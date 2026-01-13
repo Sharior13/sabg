@@ -9,9 +9,10 @@
 <body>
     <canvas id="canvas"></canvas>
     <form id="titleForm">
-        <input type="text" id="playerName">
-        <button onclick="">Start</button>
+        <input type="text" id="playerName" placeholder="Enter your name" required><br>
+        <button>Start</button>
     </form>
+    <div id="playerBoard"></div>
     <!-- <script src="https://cdn.socket.io/4.8.3/socket.io.min.js"></script> -->
     <script src="/socket.io/socket.io.js"></script>
     <script type="module" src="./js/main.js"></script>

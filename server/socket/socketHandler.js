@@ -4,18 +4,21 @@ const map = require('../game/map/map1.js');
 
 const socketHandler = (io)=>{
 
-    //handle user connection
     io.on('connection', (socket)=>{
-        console.log("user connected!");
-        
-        state.player[socket.id] = new Player(socket.id);
+        //handle user connection
+        socket.on('playerName', (playerName)=>{
+            console.log("user connected!");
+            state.player[socket.id] = new Player(socket.id, playerName);
+            socket.emit("id", socket.id);
+        });
 
-        socket.emit("id", socket.id);
         socket.emit('map',map);
         
         //handle user inputs
-        socket.on('input',(input)=>{
-            state.player[socket.id].input = input;
+        socket.on('input', (input)=>{
+            if(state.player[socket.id]){
+                state.player[socket.id].input = input;
+            }
         });
         
         //handle user disconnection
