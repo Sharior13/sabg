@@ -6,6 +6,7 @@ const { circleCollision, borderCollision}  = require('./game/collision.js');
 const gameLoop = (io)=>{
     setInterval(()=>{
         const now = Date.now();
+        state.scores = Object.values(state.player);
 
         //loop through every connected player
         for(const id in state.player){
@@ -115,11 +116,7 @@ const gameLoop = (io)=>{
             }
 
         }
-        state.scores = Object.values(state.player);
-        state.scores.sort((a,b)=>{
-            a.score - b.score;
-        });
-        console.log(state.scores);
+        state.scores.sort((a,b)=> b.score - a.score);
 
         for(let i=0; i<state.bullets.length; i++){
             //bullet to map collision
