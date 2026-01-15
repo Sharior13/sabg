@@ -1,5 +1,7 @@
 const state = require('./state.js');
+const weapons = require('./weapons.js');
 const { Bullet } = require('./entities.js');
+state.weapons = weapons;
 
 const fireWeapon = (player, state, now)=>{
 

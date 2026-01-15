@@ -1,3 +1,5 @@
+import { titleScreen } from "./main.js";
+
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
@@ -19,6 +21,7 @@ const setMap = (map)=>{
 };
 
 const playerBoard = document.getElementById('playerBoard');
+
 
 const displayLeaderboard = (player)=>{
     playerBoard.innerHTML = "";
@@ -111,10 +114,19 @@ const initiateRender = ()=>{
 
     //frontend game loop
     const animate = ()=>{
-        requestAnimationFrame(animate);
+        const animateId = requestAnimationFrame(animate);
         if(!window.gameState || !window.myId){
             return
         };
+        if(window.gameState.hasEnded){
+            if(window.gameState.gameEndTime && (Date.now() - window.gameState.gameEndTime) > 10000){
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                titleScreen();
+                return;
+            }
+            // endScreen();
+            return;
+        }
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         updateCamera();
         ctx.save();

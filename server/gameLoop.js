@@ -3,16 +3,39 @@ const map = require('./game/map/map1.js');
 const fireWeapon = require('./game/fireWeapon.js');
 const { circleCollision, borderCollision}  = require('./game/collision.js');
 
+
+const resetState = ()=>{
+    state.hasEnded = false;
+    state.gameEndTime = null;
+    for(const id in state.player){
+        delete state.player[id];
+    }
+    state.bullets = [];
+    state.scores = [];
+};
 const gameLoop = (io)=>{
     setInterval(()=>{
+
         const now = Date.now();
         state.scores = Object.values(state.player);
-
+        
+        if(state.gameEndTime && (now - state.gameEndTime) > 10000){
+            resetState();
+        }
+        if(state.hasEnded){
+            return;
+        }
         //loop through every connected player
         for(const id in state.player){
             let p = state.player[id];
             let weapon = state.weapons[p.weapon];
-            
+
+            //end condition
+            if(p.score >= 1){
+                state.hasEnded = true;
+                state.gameEndTime = now;
+            }
+
             //player respawn logic
             if(p.isDead && (now - p.deathTime) > 5000){
                 p.isDead = false;
@@ -114,8 +137,8 @@ const gameLoop = (io)=>{
             if(p.score < 0){
                 p.score = 0;
             }
-
         }
+        //sort players according to scores
         state.scores.sort((a,b)=> b.score - a.score);
 
         for(let i=0; i<state.bullets.length; i++){

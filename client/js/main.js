@@ -19,9 +19,10 @@ const titleScreen = ()=>{
         
         startGame();
     });
+    
     const startGame = ()=>{
         titleForm.style.display = "none";
-        playerBoard.style = `top:${-canvas.height+100}px;`;
+        playerBoard.style = `top:${-canvas.height}px;`;
         playerBoard.style.display = "block";
         
         initiateSocket(initiateInput(), playerName.value);
@@ -34,3 +35,6 @@ const titleScreen = ()=>{
 titleScreen();
 // initiateSocket(initiateInput());
 // initiateRender();
+
+
+export { titleScreen };

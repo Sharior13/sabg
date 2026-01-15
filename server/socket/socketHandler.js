@@ -27,6 +27,11 @@ const socketHandler = (io)=>{
             delete state.player[socket.id];
             io.emit('updateState', state);
         });
+
+        //disconnect player
+        if(state.hasEnded){
+            socket.disconnect(true);
+        }
     });
 }
 
