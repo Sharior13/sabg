@@ -6,7 +6,7 @@ const { Server } = require('socket.io');
 const port = 1300;
 const app = express();
 const server = createServer(app);
-const io = new Server(server, { pingInterval: 2000, pingTimeout: 5000});
+const io = new Server(server, { pingInterval: 2000, pingTimeout: 5000, autoConnect: false});
 
 app.use(express.static('client'));
 

@@ -6,6 +6,8 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+let isRendering = false;
+
 let currentMap = null;
 //add map image logic later
 let mapImage = new Image();
@@ -33,6 +35,9 @@ const displayLeaderboard = (player)=>{
 
 
 const initiateRender = ()=>{
+    if(isRendering){
+        return;
+    }
 
     //draw all connected players
     const drawPlayer = ()=>{
@@ -114,15 +119,19 @@ const initiateRender = ()=>{
 
     //frontend game loop
     const animate = ()=>{
-        const animateId = requestAnimationFrame(animate);
+        requestAnimationFrame(animate);
         if(!window.gameState || !window.myId){
             return
         };
         if(window.gameState.hasEnded){
-            if(window.gameState.gameEndTime && (Date.now() - window.gameState.gameEndTime) > 10000){
+            if(window.gameState.gameEndTime && (Date.now() - window.gameState.gameEndTime) > 5000){
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
+                playerBoard.innerHTML = "";
+                playerBoard.style.display = "none";
+
+                window.gameState = null;
+                isRendering = false;
                 titleScreen();
-                return;
             }
             // endScreen();
             return;

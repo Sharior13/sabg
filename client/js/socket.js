@@ -1,7 +1,15 @@
 import { setMap, displayLeaderboard } from "./renderer.js";
-const initiateSocket = (input, playerName)=>{
-    const socket = io();
 
+let socket = null;
+let inputInterval = null;
+
+const initiateSocket = (input, playerName)=>{
+    if(socket){
+        return;
+    }
+
+    socket = io();
+    
     //get current player id
     socket.on('id', (id)=>{
         window.myId = id;
@@ -15,10 +23,9 @@ const initiateSocket = (input, playerName)=>{
         window.gameState = backEndState;
         displayLeaderboard(window.gameState.scores);
 
-        //disconnect player
+        //disconnect player on game end
         if(window.gameState.hasEnded){
-            socket.disconnect();
-            return;
+            cleanupSocket();
         }
     });
 
@@ -28,12 +35,28 @@ const initiateSocket = (input, playerName)=>{
     });
 
     //send input to backend
-    setInterval(()=>{
-        socket.emit('input', input);
+    inputInterval = setInterval(()=>{
+        if(socket){
+            socket.emit('input', input);
+        }
     }, 1000/60);
 
     //send player name to backend
     socket.emit('playerName', playerName);
-
 }
-export { initiateSocket };
+
+const cleanupSocket = ()=>{
+
+    //handle player disconnect after game ends
+    if(inputInterval){
+        clearInterval(inputInterval);
+        inputInterval = null;
+    }
+
+    if(socket){
+        socket.off();
+        socket.disconnect();
+        socket = null;
+    }
+}
+export { initiateSocket, cleanupSocket };

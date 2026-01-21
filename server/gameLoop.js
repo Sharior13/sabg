@@ -19,7 +19,7 @@ const gameLoop = (io)=>{
         const now = Date.now();
         state.scores = Object.values(state.player);
         
-        if(state.gameEndTime && (now - state.gameEndTime) > 10000){
+        if(state.gameEndTime && (now - state.gameEndTime) > 5000){
             resetState();
         }
         if(state.hasEnded){
